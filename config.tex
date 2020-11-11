@@ -1,0 +1,357 @@
+% Author: Carolin Wortmann
+\documentclass[%
+	paper=a4,
+	fontsize=11pt,
+	ngerman,
+	twoside,
+	toc=listof, 
+	]{scrbook}
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% ::::::::::::::::: Encoding/Language :::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\usepackage{scrtime}	
+	\usepackage{datetime}									% To set date	
+	\usepackage{etex}
+	\usepackage{shellesc}									% Compile using -shell-escape!
+	\usepackage[utf8]{inputenc}								% UTF8-encoding
+	\usepackage{babel}										% German typographical rules 
+	\usepackage[german=quotes]{csquotes}					% German quotes 
+	
+	
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::::::::: Colours ::::::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	
+	\usepackage[usenames,x11names,final]{xcolor}
+	\definecolor{fbblau}{HTML}{3078AB}
+	\definecolor{mediumgrey}{gray}{.65}
+	\definecolor{darkgrey}{gray}{.35}	
+	\definecolor{stdblue}{HTML}{00387A}
+	\definecolor{stdred}{HTML}{900000}
+
+	
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% ::::::::::::::::::: Hyperrefs/URLS ::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
+	
+	\usepackage{url}
+	\usepackage[%
+		hidelinks,
+		pdfpagelabels,
+		bookmarksopen=true,
+		bookmarksnumbered=true,
+		linkcolor=black,
+		urlcolor=SkyBlue2,
+		plainpages=false,
+		pagebackref,
+		citecolor=black,
+		hypertexnames=true,
+		pdfauthor={Carolin Julia Wortmann},
+		pdfborderstyle={/S/U},
+		linkbordercolor=SkyBlue2,
+		colorlinks=false,
+		backref=false]{hyperref}
+	\hypersetup{final}
+	
+	
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::::::: Bibliography :::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\usepackage[%
+		backend=biber,
+		style=numeric,
+		natbib,
+		maxbibnames=2,
+		sortcites,
+		hyperref,
+		url=false, 
+		doi=true,
+		eprint=false
+	]{biblatex}
+	\addbibresource{literatur/literatur.bib}
+	\DefineBibliographyStrings{ngerman}{% 
+		andothers = {et\addabbrvspace al\adddot},             
+	}	
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::::: Graphics/Floats ::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\usepackage[final]{graphicx}							% More graphics options
+	\graphicspath{ {./img/} }								% Filepath for \includegraphics{imagefile}
+	\usepackage[labelformat=simple]{subcaption}
+	\usepackage{caption}
+	\captionsetup{font=small}
+	\renewcommand\thesubfigure{(\alph{subfigure})}
+	\usepackage{float}
+	\usepackage{rotating}
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% ::::::::::::::::::::: Fonts etc. ::::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	\usepackage[T1]{fontenc}
+	\usepackage{dsfont}
+	\usepackage{textcomp} 
+	\usepackage[babel=true,final,tracking=smallcaps]{microtype} % MAJOR improvement to text using pdflatex
+	\DisableLigatures{encoding = T1, family = tt* } 		% Disable ligatures for monospace fonts
+	\usepackage{ellipsis}
+	
+	\renewcommand{\sfdefault}{pag}							% Set default serif font for \sffamily or \textsf
+	\renewcommand{\rmdefault}{cmr}							% Set default roman font for \rmfamily or \textrm
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% ::::::::::::::::::::: ToDo Notes ::::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\usepackage[disable]{todonotes} 						% Add \todo{text} Notes to document
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% ::::::::::::::::::::::: Maths :::::::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\usepackage{mathtools}									% Extends amsmath
+	\usepackage{amssymb}									% Symbols
+	\usepackage{wasysym}									% More symbols
+	\usepackage{amsthm}										% Allows use of theorems etc.
+	\usepackage[bigdelims]{newtxmath}						% Modern font in math mode
+	\allowdisplaybreaks										% Allow pagebreaks in math mode
+	\usepackage{bm}											% Allow bold math font
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::::::::::: Tikz :::::::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\usepackage{tikz}										% Use tikz to draw graphics
+	\usepackage{tikz-cd}									% Commutative diagrams
+	\usetikzlibrary{arrows.meta}			
+	\usetikzlibrary{calc}					
+	\tikzset{>=Latex}										% Set arrow head
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% ::::::::::::::::::: Pagestyle etc :::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\usepackage{scrlayer-scrpage}							% Gives interface similar to old scrpage2
+	\pagestyle{scrheadings}
+	\usepackage[%											% Set borders
+		top=1.5cm, 
+		bottom=2cm, 
+		left=3.5cm, 
+		right=3.5cm, 
+		includeheadfoot]{geometry}
+	
+	\clearscrheadfoot 
+	\setkomafont{pagehead}{\bfseries }						% Font option header
+	\setkomafont{chapter}{\Large}							% Font option chapter title
+	\setkomafont{section}{\large}							% Font option section title
+	\setkomafont{subsection}{\large}						% Font option subsection title
+	\setkomafont{paragraph}{\rmfamily\normalsize}			% Font option paragraph title		
+	\setkomafont{pagefoot}{\normalfont\footnotesize}		% Font option footer
+	
+	\renewcommand{\chapterpagestyle}{scrheadings}			% First page of chapter should have same format
+	\lehead{\scshape\leftmark} 								% Show chapter title on top outer of left page
+	\rohead{\rightmark}										% Show section title on top outer of right page
+	\ofoot[\pagemark]{\pagemark}							% Page number on outer side
+	\raggedbottom											% Set ragged bottom
+	
+	
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::::::::: Spacings :::::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	
+	\RedeclareSectionCommand[% 								% Set chapter spacing (before/after title)
+	afterindent=false,
+	beforeskip=0pt,
+	afterskip=.5\baselineskip]{chapter}
+	\RedeclareSectionCommand[%								% Set section spacing (before/after title)
+	afterindent=false,
+	beforeskip=\baselineskip,
+	afterskip=.3\baselineskip]{section}
+	\RedeclareSectionCommand[%								% Set subsection spacing (before/after title)
+	afterindent=false,
+	beforeskip=.75\baselineskip,
+	afterskip=.3\baselineskip]{subsection}
+	
+	\usepackage{setspace}									% Advanced spacing options
+	\setstretch{1.15}										% Set spacing between lines
+	\setlength{\parskip}{0\baselineskip}					% Set skip of new paragraphs to zero
+	
+	
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::::: Tables and Lists :::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\usepackage{multicol}									% Merge columns
+	\usepackage{multirow}									% Merge rows
+	\usepackage[shortlabels]{enumitem}						% Control layout of itemize, description and enumerate
+	\setlist{itemsep=0pt}									% Set item separation for all those environments
+	\setlist[enumerate]{font=\sffamily}						% SF font for enum items		
+	\setlist[itemize]{label=$\triangleright$}				% Triangular label for itemize
+	\usepackage{tabularx}									% Advanced options for tables
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% ::::::::::::::::::::: Pseudocode ::::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\usepackage{algorithmicx}								% Use algorithmics to style algorithms
+	\usepackage{algorithm}									% Basic display of algorithms
+	\floatname{algorithm}{Algorithmus} 						% German identifier
+	\makeatletter											% Algorithms should be numbered as chapternumber.number
+		\renewcommand{\thealgorithm}{\arabic{chapter}.\arabic{algorithm}}
+		\@addtoreset{algorithm}{chapter}		
+	\makeatother
+	\usepackage[noend]{algpseudocode}						% No endif/endfor/etc statements
+	\makeatletter											% German title for \listofalgorithms
+		\renewcommand{\listalgorithmname}{Algorithmenverzeichnis}
+	\makeatother
+	\usepackage{eqparbox}
+%	\renewcommand{\algorithmiccomment}[1]{\hfill // #1}			
+%	\renewcommand{\Comment}[2][.6\linewidth]{%				% Display comments as "// [...]"
+%		\leavevmode\hfill\makebox[#1][l]{//~#2}}
+	\renewcommand\algorithmiccomment[1]{%
+		\hfill {\color{darkgrey} // \ \eqparbox{Comment}{#1}}%
+	}
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::: Source Code Highlighting :::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% I highly recommend to have a look at the minted documentation to select the formatting and style
+% options you like best and check out the paramters to use.
+
+	\usepackage[newfloat]{minted}							% Use nofloat package for captions
+	\setminted{%											% Sets formatting for code blocks 
+		style=default,										% Another nice option: vs		
+		fontsize=\small,
+		breaklines,
+		breakanywhere=false,
+		breakbytoken=false,
+		breakbytokenanywhere=false,
+		breakafter={.,},
+		autogobble,
+		numbersep=3mm,
+		tabsize=4,
+		linenos,
+		frame=lines
+	}
+	\setmintedinline{%										% Sets inline format
+		style=default,
+		fontsize=\normalsize,
+		numbers=none,
+		numbersep=12pt,
+		tabsize=4,
+	}
+
+	% Surround minted block with \begin{longlisting} ... \end{longlisting} to allow pagebreaks
+	\newenvironment{longlisting}{\captionsetup{type=listing}}{}
+	
+	% Java
+	% Use \inputJava[parameters]{filepath}{caption}{label} or \inputJava{filepath}{caption}{label} for blocks using files
+	% Use \begin{JavaCode}{caption}{label} \end{JavaCode} (you may use optional parameters for minted as \begin{JavaCode}[optional parameters]{caption}{label} \end{JavaCode} )
+	% Use \inlineJava{code} for inline snippets
+	\DeclareDocumentCommand{\inputJava}{o m m m}{%	
+		\IfNoValueTF{#1}{\begin{longlisting}\inputminted{java}{#2}\captionof{listing}{#3}\label{list:#4}\end{longlisting}}{% 
+			\begin{longlisting}
+			\inputminted[#1]{java}{#2}%
+			\captionof{listing}{#3}
+			\label{list:#4}
+			\end{longlisting}
+			
+		}%
+	}
+	\newmintinline[inlineJava]{java}{}
+	\newenvironment{JavaCode}[3][]
+	{\VerbatimEnvironment\begin{longlisting}\def\codecaption{#2}\def\codelabel{#3}\begin{minted}[#1]{java}}{\end{minted}\captionof{listing}{\codecaption}\label{list:\codelabel}\end{longlisting}}
+	
+
+	% C
+	% Use \inputC[parameters]{filepath} or \inputC{filepath} 
+	% Use \inlineC{code} for inline snippets
+	\DeclareDocumentCommand{\inputC}{o m}{%	
+		\IfNoValueTF{#1}{\inputminted{c}{#2}}{% 
+			\inputminted[#1]{c}{#2}%
+		}%
+	}
+	\newmintinline[inlineC]{c}{}
+	
+	% C++
+	% Use \inputCpp[parameters]{filepath} or \inputCpp{filepath} 
+	% Use \inlineCpp{code} for inline snippets
+	\DeclareDocumentCommand{\inputCpp}{o m}{%	
+		\IfNoValueTF{#1}{\inputminted{cpp}{#2}}{% 
+			\inputminted[#1]{cpp}{#2}%
+		}%
+	}
+	\newmintinline[inlineCpp]{cpp}{}
+	
+	% Any other language: minted supports most languages
+	% For code blocks: \inputminted[parameter]{Sprache}{Dateipfad}, first two are optional
+	
+	\newcommand{\setLineNumbering}[1]{\renewcommand\theFancyVerbLine{\ifnum\value{FancyVerbLine}=1
+			\setcounter{FancyVerbLine}{#1}%
+			\rmfamily\tiny\arabic{FancyVerbLine}%
+			\else
+			\rmfamily\tiny\arabic{FancyVerbLine}%
+			\fi
+	}}
+	
+	
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::: Theorems/Definitions/etc :::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\theoremstyle{plain}										% Style for anything you're going to prove	
+	\newtheorem{theorem}[algorithm]{Theorem} 					% Use as environment \begin{theorem} ... \end{theorem}
+	\newtheorem{lemma}[algorithm]{Lemma}
+	\newtheorem{satz}[algorithm]{Satz} 
+	\newtheorem{korollar}[algorithm]{Korollar} 
+	
+	\theoremstyle{definition}									% Style for definitions etc
+	\newtheorem{definition}[algorithm]{Definition} 
+	\newtheorem{bemerkung}[algorithm]{Bemerkung} 
+	\newtheorem{notation}[algorithm]{Notation} 
+	%\newtheorem{beweis}[algorithm]{Beweis} 
+	
+	% Numbering is dependant on algorithm numbering, so chapternumber.number. This means that algorithms, code,
+	% definitions, theorems, etc. will use the same counter, which is reset for each chapter.
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::::::::: Names etc.  ::::::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	\newcommand{\tAuthor}{Name}
+	\newcommand{\tMail}{Mail}
+	\newcommand{\tStudentId}{123456}
+	\newcommand{\tTitle}{Titel}
+	\newcommand{\tReviewer}{Name}
+	\newcommand{\tReviewerMail}{Mail}
+	\newcommand{\tReviewerInstitute}{Institute}
+	\newcommand{\tSecondAdviser}{Name}
+	\newcommand{\tSecondAdviserMail}{Mail}
+	\newcommand{\tSecondReviewer}{Name}
+	\newcommand{\tSecondReviewerInstitute}{Institute}
+
+
+	\def\blankpage{%
+		\clearpage%
+		\thispagestyle{empty}%
+		\addtocounter{page}{-1}%
+		\null%
+		\clearpage}
+	\makeatletter
+	\let\newtitle\@title								
+	\let\newauthor\@author
+	\makeatother

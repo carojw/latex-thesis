@@ -1,0 +1,89 @@
+\chapter{Beispiele}
+Nachfolgend zeige ich einige kurze Ausschnitte meiner Bachelorarbeit, um beispielhaft zu zeigen, wie bestimmte Umgebungen genutzt werden können. Man kann in allen Fälen noch viel mehr machen, aber so entsteht vielleicht eine Idee. 
+
+\section{Algorithmen}
+Ein wichtiger Aspekt ist oft Pseudocode. Hierzu gibt es eine Vielzahl von packages, ich selbst nutze \texttt{algorithmicx} in der \texttt{algpseudocode}-Variante. Die Bedienung ist recht intutitiv. Nachfolgend ein Beispiel zur diskreten Fréchet-Distanz auf Trajektorien (zeitlich geordneten Punktfolgen).
+\begin{algorithm}
+	\caption{zur Berechnung der diskreten Fréchet-Distanz zwischen zwei Trajektorien $A=(a_1,\dots,a_n)$ und $B=(b_1,\dots,b_m)$ mit $1\leq n,m$.}
+	\label{alg:dfrechet}
+	\begin{algorithmic}[1] % l wenn keine Nummern
+		\Require Es gilt $|A|,|B| \geq 1$.
+		\Function {discreteFréchet}{Trajektorie $A$,Trajektorie $B$}
+		\State Erzeuge Feld $D[1,\dots, n][1,\dots, m]$
+		\For{$i:=1$ to $n$}
+		\For {$j:=1$ to $m$} 
+		\If{$i=j=1$}
+		\State $D[1][1]:=d(a_1,b_1)$ 	\Comment{Basisfall}
+		\ElsIf{$i=1$} \Comment{zweite Bedingung}
+		\State $D[i][j]:=\max\{d(a_i,b_j),D[i][j-1]\}$
+		\ElsIf{$j=1$} \Comment{dritte Bedingung}
+		\State $D[i][j]:=\max\{d(a_i,b_j),D[i-1][j]\}$
+		\Else \Comment{$i,j>1$}
+		\State $D[i][j]:=\max\{d(a_i,b_j),\min\{D[i][j-1],D[i-1][j],D[i-1][j-1]\}\}$
+		\EndIf 
+		\EndFor 
+		\EndFor
+		\State 	\Return $D[n][m]$ 
+		\EndFunction 
+	\end{algorithmic}
+\end{algorithm}
+
+\section{Code-Beispiele}
+Für Code-Beispiele nutze ich \texttt{minted}, in der config-Datei habe ich Makros für Java, C und C++ hinzugefügt. Das geht entweder über ausgelagerte Dateien oder über direktes Einfügen des Codes.  Labels werden automatisch mit dem Prefix "list:" versehen. 
+Dieser Code liefert die nachfolgende Ausgabe:
+	\begin{minted}{tex}
+		\begin{JavaCode}{Dies ist eine Beschreibung.}{label}
+			// Simple implementation of recursive equation for coupling distance.
+			for (int i = 0; i < pointsA.length; i++) {
+				for (int j = 0; j < pointsB.length; j++) {
+					double deltaCurrent =
+					delta.getDistance(pointsA[i].getxValue(), pointsA[i].getyValue(), pointsB[j].getxValue(), pointsB[j].getyValue());
+					if (j == 0 && i == 0) {
+						resultMatrix[i][j] = deltaCurrent;
+					} else if (i == 0) {
+						resultMatrix[i][j] = distanceOperator(deltaCurrent, resultMatrix[i][j-1]);
+					} else if (j == 0) {
+						resultMatrix[i][j] = distanceOperator(deltaCurrent, resultMatrix[i-1][j]);
+					} else {
+						resultMatrix[i][j] =
+						distanceOperator(deltaCurrent, getMin(resultMatrix[i-1][j], resultMatrix[i][j-1], resultMatrix[i-1][j-1]));
+					}
+				}
+			}
+		\end{JavaCode}
+	\end{minted}
+{\setLineNumbering{5}
+	\begin{JavaCode}{Dies ist eine Beschreibung.}{label}
+		// Simple implementation of recursive equation for coupling distance.
+		for (int i = 0; i < pointsA.length; i++) {
+			for (int j = 0; j < pointsB.length; j++) {
+				double deltaCurrent =
+				delta.getDistance(pointsA[i].getxValue(), pointsA[i].getyValue(), pointsB[j].getxValue(), pointsB[j].getyValue());
+				if (j == 0 && i == 0) {
+					resultMatrix[i][j] = deltaCurrent;
+				} else if (i == 0) {
+					resultMatrix[i][j] = distanceOperator(deltaCurrent, resultMatrix[i][j-1]);
+				} else if (j == 0) {
+					resultMatrix[i][j] = distanceOperator(deltaCurrent, resultMatrix[i-1][j]);
+				} else {
+					resultMatrix[i][j] =
+					distanceOperator(deltaCurrent, getMin(resultMatrix[i-1][j], resultMatrix[i][j-1], resultMatrix[i-1][j-1]));
+				}
+			}
+		}
+	\end{JavaCode}
+	Man kann dabei die Zeilennummern mit dem optionalen Parameter \enquote{linenos=false} ausstellen oder mit \enquote{firstline=151} bzw. \enquote{lastline=160} manuell einschränken, welchen Bereich des Code-Ausschnittes/der Datei man zeigen möchte (bietet sich vor allem beim Einbinden von Dateien an). Mit dem Makro \texttt{\setLineNumbering{<value>}} könnt ihr den Startwert der Zeilennummern setzen. \textbf{Wenn ihr das außerhalb einer Gruppe/Umgebung setzt, ist die Änderung global. Also am besten den Befehl und den COde, auf den es sich auswirken soll, mit geschweiften Klammern versehen :)}}
+	
+	Das Einbinden von Code aus Dateien funktioniert analog mit 
+	\begin{minted}[linenos=false]{tex}
+	\inputJava[parameters]{filepath}{caption}{label}
+	\end{minted}
+	Dabei sind die Parameter wieder optional. Die gleichen Makros sind auch für C und C++ angelegt (ersetzt \enquote{Java} durch \enquote{C} bzw. \enquote{C++}). 
+
+\section{Grafiken}
+
+\section{Theoreme, Sätze, Lemmata, Definitionen}
+
+\section{Grafiken}
+
+\section{Einige nützliche Tools}

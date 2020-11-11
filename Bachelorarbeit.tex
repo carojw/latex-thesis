@@ -1,0 +1,102 @@
+%!TEX TS-program = pdflatex
+%!TEX TS-options = -shell-escape
+\input{config.tex}	
+\usepackage{lipsum}
+
+
+\renewcommand{\tAuthor}{Vorname Nachname}					% Eigener Name
+\renewcommand{\tMail}{mail@wwu.de}							% Eigene Mailadresse
+\renewcommand{\tTitle}{Titel der Arbeit}					% Titel der Arbeit
+\renewcommand{\tReviewer}{Prof. Dr. Max Mustermann}			% Erstbetreuer/-gutachter
+\renewcommand{\tReviewerMail}{max.mustermann@wwu.de}		% Erstbetreuer/-gutachter Mail
+\renewcommand{\tReviewerInstitute}{Informatik}				% Erstbetreuer Institut
+\renewcommand{\tSecondAdviser}{Jane Doe}					% Zweitbetreuer
+\renewcommand{\tSecondAdviserMail}{jane.doe@wwu.de}			% Zweitbetreuer Mail
+\renewcommand{\tSecondReviewer}{Prof. Dr. John Doe}			% Zweitgutachter
+\renewcommand{\tSecondReviewerInstitute}{Informatik}		% Zweitgutachter Institut
+\newdate{submissiondate}{13}{01}{2020}						% Abgabedatum
+
+
+
+\begin{document}
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% ::::::::::: Titelseite, Inhaltsverzeichnis, etc :::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	% Titelseite 
+		\include{chapter/titlepage}
+		
+		\blankpage 
+	
+	%\listoftodos 											% Anzeigen aller \todo{text} am Anfang als Liste
+	
+	
+	\pagenumbering{Roman} 									% Römische Seitennummern für den Anfangsteil
+	\pagestyle{empty} 										% Abstract mit leerer Seite
+	\include{chapter/abstract}
+	
+	\pagestyle{scrheadings} 								% Seitenstil innerhalb der Arbeit und für das Inhaltsverzeichnis
+	
+	% Inhaltsverzeichnis
+	%\setcounter{tocdepth}{1} 								% Falls man die Level des TOC anpassen möchte 
+	\tableofcontents
+	%\addtocontents{toc}{~\hfill\textbf{Seite}\par} 		% Anzeige von "Seite" über Seitenzahlen
+	
+	\blankpage  
+	
+	\pagestyle{scrheadings}
+	
+	\pagenumbering{arabic}
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% :::::::::::::::::: Eigentliche Arbeit :::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	% Die Hauptkapitel der Arbeit
+	\include{chapter/kapitel1}
+	
+	Dies ist ein Beispiel, wie man einfach zitieren kann 
+	\citep{smith2009}, natürlich funktionieren auch bestimmte Kapitel oder Abschnitte \citep[Kapitel 1]{smith2010}.
+	
+	\include{chapter/kapitel2}
+
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% ::::::::::::::: Verzeichnisse, Anhang :::::::::::::::::::::
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	% Literaturverzeichnis
+	\printbibliography[heading=bibintoc]
+	
+	
+	
+	\pagestyle{plain}
+	%% Abbildungsverzeichnis
+	%\addcontentsline{toc}{chapter}{\listfigurename}
+	%\listoffigures
+	%
+	%%% Tabellenverzeichnis
+	%%\addcontentsline{toc}{chapter}{\listtablename}
+	%%\listoftables
+	%% Algorithmenverzeichnis
+	%\addcontentsline{toc}{chapter}{\listalgorithmname}
+	
+	%\listofalgorithms
+	
+	% Ggf Anhang
+
+
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+% !!!!!!!!!! Eidesstattliche Erklärung, WICHTIG !!!!!!!!!!!!!
+% :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	
+	\include{chapter/EidesstattlicheErklaerung}	
+
+
+
+
+\end{document}
