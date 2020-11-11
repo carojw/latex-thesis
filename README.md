@@ -1,2 +1,2 @@
-# latex-thesis
+# Bachelorarbeitsvorlage in LaTeX
 Dies ist, im Wesentlichen, die Vorlage, die ich mir für meine Bachelorarbeit im Fach Informatik an der Uni Münster erstellt habe. Da mich nun einige Leute darum gebeten haben, habe ich sie einmal aufgeräumt, einige Beispiele hinzugefügt und auf GitHub geladen. Ich erhebe absolut keinen Anspruch auf Eleganz, Korrektheit, oder ähnliches, aber ich bin damit selbst gut klargekommen. Bei Problemen/Fragen meldet euch gerne. Für das Syntax Highlighting wird minted verwendet, welches Python und das entsprechende package Pygments benötigt, Anleitungen zur Installation gibt es zu Genüge. 
