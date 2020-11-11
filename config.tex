@@ -271,28 +271,38 @@
 	}
 	\newmintinline[inlineJava]{java}{}
 	\newenvironment{JavaCode}[3][]
-	{\VerbatimEnvironment\begin{longlisting}\def\codecaption{#2}\def\codelabel{#3}\begin{minted}[#1]{java}}{\end{minted}\captionof{listing}{\codecaption}\label{list:\codelabel}\end{longlisting}}
+	{\VerbatimEnvironment\begin{longlisting}\def\codecaption{#2}\def\codelabel{#3}\begin{minted}[#1]{c}}{\end{minted}\captionof{listing}{\codecaption}\label{list:\codelabel}\end{longlisting}}
 	
 
 	% C
-	% Use \inputC[parameters]{filepath} or \inputC{filepath} 
-	% Use \inlineC{code} for inline snippets
-	\DeclareDocumentCommand{\inputC}{o m}{%	
-		\IfNoValueTF{#1}{\inputminted{c}{#2}}{% 
-			\inputminted[#1]{c}{#2}%
+	% Usage similar to Java
+	\DeclareDocumentCommand{\inputC}{o m m m}{%	
+		\IfNoValueTF{#1}{\begin{longlisting}\inputminted{c}{#2}\captionof{listing}{#3}\label{list:#4}\end{longlisting}}{% 
+			\begin{longlisting}
+				\inputminted[#1]{c}{#2}%
+				\captionof{listing}{#3}
+				\label{list:#4}
+			\end{longlisting}
 		}%
 	}
 	\newmintinline[inlineC]{c}{}
+	\newenvironment{CCode}[3][]
+	{\VerbatimEnvironment\begin{longlisting}\def\codecaption{#2}\def\codelabel{#3}\begin{minted}[#1]{c}}{\end{minted}\captionof{listing}{\codecaption}\label{list:\codelabel}\end{longlisting}}
 	
 	% C++
-	% Use \inputCpp[parameters]{filepath} or \inputCpp{filepath} 
-	% Use \inlineCpp{code} for inline snippets
-	\DeclareDocumentCommand{\inputCpp}{o m}{%	
-		\IfNoValueTF{#1}{\inputminted{cpp}{#2}}{% 
-			\inputminted[#1]{cpp}{#2}%
+	% Usage similar to Java
+	\DeclareDocumentCommand{\inputCpp}{o m m m}{%	
+		\IfNoValueTF{#1}{\begin{longlisting}\inputminted{cpp}{#2}\captionof{listing}{#3}\label{list:#4}\end{longlisting}}{% 
+			\begin{longlisting}
+				\inputminted[#1]{cpp}{#2}%
+				\captionof{listing}{#3}
+				\label{list:#4}
+			\end{longlisting}
 		}%
 	}
 	\newmintinline[inlineCpp]{cpp}{}
+	\newenvironment{CppCode}[3][]
+	{\VerbatimEnvironment\begin{longlisting}\def\codecaption{#2}\def\codelabel{#3}\begin{minted}[#1]{cpp}}{\end{minted}\captionof{listing}{\codecaption}\label{list:\codelabel}\end{longlisting}}
 	
 	% Any other language: minted supports most languages
 	% For code blocks: \inputminted[parameter]{Sprache}{Dateipfad}, first two are optional
